@@ -2,20 +2,11 @@
 import os 
 import csv
 
-
-## Use a dictionary for number of votes per candidate and also percentage of votes per candidate ##
-
-# open the file path 
-election_file = os.path.join("Resources", "election_data.csv")
-
-# file path to write to the analysis file
-output_path = os.path.join("Analysis", "PyPoll_output.csv")
-
 election_list = []
 
 def poll_analysis(election_list):
     # Formatting
-    print("Election Results")
+    print("ELECTION RESULTS")
     print("---------------------------")
 
     # Find the total number of votes cast
@@ -58,6 +49,11 @@ def poll_analysis(election_list):
 
     print("---------------------------")
 
+
+
+# open the file path 
+election_file = os.path.join("Resources", "election_data.csv")
+
 # read the file to begin working with the data
 with open(election_file, "r") as csvfile:
 
@@ -73,18 +69,15 @@ with open(election_file, "r") as csvfile:
     # Calling our Function
     poll_analysis(election_list)
 
-# f = open('Analysis/PyPoll_output.csv', 'w')
-# f.write(poll_analysis(election_list))
-# f.close()
+    
 
+# file path to write to the analysis file
+output_path = os.path.join("Analysis", "PyPoll_output.csv")
 
 # Outputting results to new file
 with open(output_path, 'w') as csvfile:
 
     # creating the csv.writer
     csvwriter = csv.writer(csvfile)
-
-    poll_analysis(election_list)
-    
 
 

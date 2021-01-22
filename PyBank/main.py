@@ -14,7 +14,7 @@ with open(budget_file, "r") as csvfile:
     # Allow us to read into the data file
     budget_reader = csv.reader(csvfile, delimiter=",")
 
-    # NEED TO SKIP THE HEADER FOR THE FUNCTION TO WORK PROPERLY
+    # Skipping the header but saving it in a variable
     header = next(budget_reader, None)
 
     # Reading the budget_reader into a new list so we can use the functions we need

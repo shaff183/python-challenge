@@ -1,5 +1,5 @@
 # python-challenege
-## Python script for analyzing a companies financial records and voting data spanning multiple counties. 
+## Python script for analyzing a companies financial records as well as voting data spanning multiple counties. 
 ### PyBank, this python script will analyze:
 * The total number of months included in the dataset
 

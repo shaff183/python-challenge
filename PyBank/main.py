@@ -2,12 +2,26 @@
 import os 
 import csv 
 
+# List to use for the data
+financialData = []
+
 # Set the file path for the data 
 budget_file = os.path.join("Resources", "budget_data.csv")
 
-financialData = []
+# Opening the file path to start working with the data
+with open(budget_file, "r") as csvfile:
 
-def analyze_data(financialData):
+    # Allow us to read into the data file
+    budget_reader = csv.reader(csvfile, delimiter=",")
+
+    # NEED TO SKIP THE HEADER FOR THE FUNCTION TO WORK PROPERLY
+    header = next(budget_reader, None)
+
+    # Reading the budget_reader into a new list so we can use the functions we need
+    for row in budget_reader:
+        financialData.append(row)
+
+    # Formatting
     print("Financial Analysis")
     print("-----------------------------------")
 
@@ -26,7 +40,6 @@ def analyze_data(financialData):
 
 
     # Calculate the change in "profit/Losses" over the entire period, then find the average of those changes
-
     # Create a temporary list of just the profits and losses and the change within those profits
     temporary_list = []
     change_in_profits_list = []
@@ -58,20 +71,25 @@ def analyze_data(financialData):
 
     print(f"Greatest Decrease in Profits: {financialData[index_decrease_change][0]} - ${greatest_decrease_in_profits}")
 
+# file path to write too the analysis folder and csv file
+output_path = os.path.join("Analysis", "PyBank_results.csv")
 
-# Opening the file path to start working with the data
-with open(budget_file, "r") as csvfile:
+# opening the file to write to it
+with open(output_path, 'w') as csvfile:
+    # initializing the csv writer
+    csvwriter = csv.writer(csvfile, delimiter = ',')
 
-    # Allow us to read into the data file
-    budget_reader = csv.reader(csvfile, delimiter=",")
+    # outputting the results from PyBank
+    csvwriter.writerow(["Financial Analysis"])
 
-    # NEED TO SKIP THE HEADER FOR THE FUNCTION TO WORK PROPERLY
-    header = next(budget_reader, None)
+    csvwriter.writerow(["-----------------------------------"])
 
-    # Reading the budget_reader into a new list so we can use the functions we need
-    for row in budget_reader:
-        financialData.append(row)
+    csvwriter.writerow([f"Total Months: {total_months}"])
 
-    # Calling the function
-    analyze_data(financialData)
-    
+    csvwriter.writerow([f"Total: ${total_profit_losses}"])
+
+    csvwriter.writerow([f"Average Change: ${average_change:.2f}"])
+
+    csvwriter.writerow([f"Greatest Increase in Profits: {financialData[index_increase_change][0]} - ${greatest_increase_in_profits}"])
+
+    csvwriter.writerow([f"Greatest Decrease in Profits: {financialData[index_decrease_change][0]} - ${greatest_decrease_in_profits}"])

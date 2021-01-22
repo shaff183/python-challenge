@@ -67,7 +67,7 @@ with open(election_file, "r") as csvfile:
         election_list.append(row)
 
     # Formatting
-    print("ELECTION RESULTS")
+    print("Election Results")
     print("---------------------------")
 
     # Find the total number of votes cast
@@ -128,11 +128,20 @@ with open(output_path, 'w') as csvfile:
     # creating the csv.writer
     csvwriter = csv.writer(csvfile)
 
+    csvwriter.writerow(["Election Results"])
+    csvwriter.writerow(["---------------------------"])
+
+    csvwriter.writerow([f'Total Votes: {total_votes}'])
+
+    csvwriter.writerow(["---------------------------"])
+
     i = 0
     for row in final_list_candidates:
         csvwriter.writerow([f"{final_list_candidates[i]}: {final_list_percents[i]:.2f}% ({final_list_votes[i]})"])
         i += 1
 
+    csvwriter.writerow(["---------------------------"])
+
     csvwriter.writerow([(f"Winner: {winner}")])
 
-
+    csvwriter.writerow(["---------------------------"])
